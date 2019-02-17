@@ -51,7 +51,8 @@ public class MainActivity extends AppCompatActivity implements Observer {
 
 
     private AutoCompleteTextView textCommand;
-    static TextView TEXT_RESPONSE;
+    static String TEXT_RESPONSE;
+    private boolean performingActions;
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
     @Override
@@ -78,7 +79,7 @@ public class MainActivity extends AppCompatActivity implements Observer {
     @Override
     protected void onResume() {
         if (telloController.isExceptionErrorInetAddress()) {
-            TEXT_RESPONSE.setText("Exception error creating InetAddress!");
+            TEXT_RESPONSE = "Exception error creating InetAddress!";
             Button button = findViewById(R.id.btnTakeOff);
             button.setEnabled(false);
         }
@@ -119,6 +120,12 @@ public class MainActivity extends AppCompatActivity implements Observer {
     @OnClick(R.id.btn_start_monitoring)
     void startMonitoring() {
         neuroSky.start();
+    }
+
+
+   public void onClickPerformAction(View view) {
+        performingActions = !performingActions;
+       System.out.println("nowo performing actionzzz");
     }
 
     @OnClick(R.id.btn_stop_monitoring)
@@ -164,51 +171,67 @@ public class MainActivity extends AppCompatActivity implements Observer {
         float[] prediction = classifier.getPrediction(normalizedWaves);
         String classReturned = classifier.getClass(prediction);
         System.out.println(classReturned);
+        if (performingActions) {
+            System.out.println("Doing the stuff: performing: " + classReturned);
+            telloController.setUdpClientMessage(classReturned);
+            telloController.udpClientSendMessage();
+            telloController.setUdpClientMessage(classReturned);
+            telloController.udpClientSendMessage();
+            telloController.setUdpClientMessage(classReturned);
+            telloController.udpClientSendMessage();
+            performingActions = !performingActions;
+        }
+
+    }
+
+    public void onClickConnect(View view) {
+        telloController.setUdpClientMessage("command");
+        telloController.udpClientSendMessage();
     }
 
     public void onClickLand(View view) {
 
         if(EXCEPTION_ERROR_CLIENT) {
-            TEXT_RESPONSE.setText("Exception error in UDP client.");
+            TEXT_RESPONSE = "Exception error in UDP client.";
         } else if(EXCEPTION_ERROR_SERVER) {
-            TEXT_RESPONSE.setText("Exception error in UDP server.");
-        } else {
-            String cmd = textCommand.getText().toString().trim();
-
-            textCommand.setText("land");
-//            textCommand.clearFocus();
-            if(DRONE_SOCKET_ACTIVE) {
-                TEXT_RESPONSE.setText("");
-            }
-            // If user presses button with no command entered, land immediately!
-            if (cmd.isEmpty()) {
-                cmd = "land";
-            }
-
-            telloController.setUdpClientMessage(cmd);
-            telloController.udpClientSendMessage();
-            Toast.makeText(this, "Sent: (" + cmd + ")", Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    public void onClickTakeOff(View view) {
-        if(EXCEPTION_ERROR_CLIENT) {
-            TEXT_RESPONSE.setText("Exception error in UDP client.");
-        } else if(EXCEPTION_ERROR_SERVER) {
-            TEXT_RESPONSE.setText("Exception error in UDP server.");
+            TEXT_RESPONSE = "Exception error in UDP server.";
         } else {
 //            String cmd = textCommand.getText().toString().trim();
-//
-//            textCommand.setText("takeoff");
+////
+////            textCommand.setText("land");
 //            textCommand.clearFocus();
             if(DRONE_SOCKET_ACTIVE) {
-                TEXT_RESPONSE.setText("");
+                TEXT_RESPONSE = "";
             }
 //            // If user presses button with no command entered, land immediately!
 //            if (cmd.isEmpty()) {
 //                cmd = "land";
 //            }
 
+            telloController.setUdpClientMessage("land");
+            telloController.udpClientSendMessage();
+            Toast.makeText(this, "Sent: (land)", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public void onClickTakeOff(View view) {
+        if(EXCEPTION_ERROR_CLIENT) {
+//            TEXT_RESPONSE.setText("Exception error in UDP client.");
+            System.out.println("Exception error in UDP client.");
+        } else if(EXCEPTION_ERROR_SERVER) {
+            TEXT_RESPONSE = "Exception error in UDP server.";
+        } else {
+//            String cmd = textCommand.getText().toString().trim();
+//
+//            textCommand.setText("takeoff");
+//            textCommand.clearFocus();
+            if(DRONE_SOCKET_ACTIVE) {
+                TEXT_RESPONSE = "";
+            }
+//            // If user presses button with no command entered, land immediately!
+//            if (cmd.isEmpty()) {
+//                cmd = "land";
+//            }
             telloController.setUdpClientMessage("takeoff");
             telloController.udpClientSendMessage();
             Toast.makeText(this, "Sent: (takeoff)", Toast.LENGTH_SHORT).show();

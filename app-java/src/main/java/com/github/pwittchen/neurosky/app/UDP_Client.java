@@ -10,7 +10,6 @@ public class UDP_Client {
 
     public String Message;
 
-    @SuppressLint({"NewApi", "StaticFieldLeak"})
     public void sendMessage() {
         new AsyncTask<Void, Void, Void>() {
             @Override

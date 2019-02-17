@@ -1,9 +1,5 @@
 package com.github.pwittchen.neurosky.app;
 
-import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
-import android.widget.TextView;
-
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -22,6 +18,7 @@ class TelloController {
     static final int DRONE_BUFFER_SIZE = 1518;
     static final int DRONE_PORT = 8889;
     static DatagramSocket UPD_SOCKET = null;
+    String commands = "command takeoff land cw ccw forward back left right up down flip speed speed? battery?";
 
     TelloController() {
          try {
@@ -35,8 +32,7 @@ class TelloController {
             udpServer.runUdpServer();
             udpClient = new UDP_Client();
         }
-        udpClient.Message = "command";
-        udpClient.sendMessage();
+
     }
 
     String[] getmCmdArray() {

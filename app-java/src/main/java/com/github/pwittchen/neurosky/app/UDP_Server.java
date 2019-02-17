@@ -14,7 +14,6 @@ public class UDP_Server {
     private String droneResponse;
 
 //    @SuppressLint("NewApi")
-    @SuppressLint("StaticFieldLeak")
     public void runUdpServer()
     {
         new AsyncTask<Void, Void, Void>() {
@@ -45,12 +44,12 @@ public class UDP_Server {
 
             protected void onProgressUpdate(Void... progress) {
                 TelloController.DRONE_SOCKET_ACTIVE = true;
-                TEXT_RESPONSE.setText(droneResponse.trim());
+                TEXT_RESPONSE = droneResponse.trim();
             }
 
             protected void onPostExecute(Void result) {
                 TelloController.DRONE_SOCKET_ACTIVE = false;
-                TEXT_RESPONSE.setText("Error. UDP server loop ended unexpectedly!");
+                TEXT_RESPONSE = "Error. UDP server loop ended unexpectedly!";
                 super.onPostExecute(result);
             }
         }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);

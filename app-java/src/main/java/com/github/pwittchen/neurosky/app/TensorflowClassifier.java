@@ -66,12 +66,12 @@ public class TensorflowClassifier {
         return 2;
     }
 
-    public String getClass(float[] a) {
+    String getClass(float[] a) {
         int index = getLargest(a);
         if (index == 2)
             return "rest";
         else if (index == 1)
             return "forward";
-        return "backward";
+        return "back";
     }
 }

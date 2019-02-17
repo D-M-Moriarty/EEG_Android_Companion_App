@@ -66,6 +66,13 @@
         android:text="@string/disconnect" />
 
     <Button
+        android:id="@+id/btnConnect"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="onClickConnect"
+        android:text="Connect" />
+
+    <Button
         android:id="@+id/btnTakeOff"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -84,6 +91,13 @@
         android:text="Land"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btnNeuroFly"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="onClickPerformAction"
+        android:text="NeuroFly" />
 
 
   </LinearLayout>
