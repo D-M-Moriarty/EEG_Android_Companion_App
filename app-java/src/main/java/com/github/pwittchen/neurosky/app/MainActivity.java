@@ -172,16 +172,21 @@ public class MainActivity extends AppCompatActivity implements Observer {
         String classReturned = classifier.getClass(prediction);
         System.out.println(classReturned);
         if (performingActions) {
+            chosenCommand(classReturned);
             System.out.println("Doing the stuff: performing: " + classReturned);
-            telloController.setUdpClientMessage(classReturned);
-            telloController.udpClientSendMessage();
-            telloController.setUdpClientMessage(classReturned);
-            telloController.udpClientSendMessage();
-            telloController.setUdpClientMessage(classReturned);
-            telloController.udpClientSendMessage();
-            performingActions = !performingActions;
+
         }
 
+    }
+
+    private void chosenCommand(String classReturned) {
+        if (classReturned.equals("forward")) {
+            telloController.setUdpClientMessage("forward 40");
+            telloController.udpClientSendMessage();
+        } else if (classReturned.equals("back")) {
+            telloController.setUdpClientMessage("back 40");
+            telloController.udpClientSendMessage();
+        }
     }
 
     public void onClickConnect(View view) {
