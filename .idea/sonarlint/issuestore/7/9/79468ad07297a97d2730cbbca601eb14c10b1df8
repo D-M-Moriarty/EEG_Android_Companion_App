@@ -1,0 +1,12 @@
+
+`squid:UselessImportCheck"0Remove this unused import 'java.io.IOException'.(ªº»Úıÿÿÿÿ8º‚À-
+"squid:SwitchLastCaseIsDefaultCheckY"YComplete cases by adding the missing enum constants or add a default case to this switch.(“«œØ8º‚À-
+qsquid:ModifiersOrderCheck "EReorder the modifiers to comply with the Java Language Specification.(ÔÎŞÖ8º‚À-
+isquid:CommentedOutCodeLined"<This block of commented-out lines of code should be removed.(¢¶ÊÇ8º‚À-
+nsquid:CommentedOutCodeLinem"<This block of commented-out lines of code should be removed.(¼©Î®ÿÿÿÿÿ8º‚À-
+]squid:UselessImportCheck"3Remove this unused import 'java.io.BufferedWriter'.(¬õº/8º‚À-
+nsquid:CommentedOutCodeLinej"<This block of commented-out lines of code should be removed.(€Øøºşÿÿÿÿ8º‚À-
+Tsquid:UselessImportCheck")Remove this unused import 'java.io.File'.(†Ğ¥Å8º‚À-
+isquid:CommentedOutCodeLineg"<This block of commented-out lines of code should be removed.(¿£íÆ8º‚À-
+nsquid:CommentedOutCodeLinez"<This block of commented-out lines of code should be removed.(Í‚Ñúÿÿÿÿ8º‚À-
+_squid:UselessImportCheck"/Remove this unused import 'java.io.FileWriter'.(Ã‘ÅÃıÿÿÿÿ8º‚À-

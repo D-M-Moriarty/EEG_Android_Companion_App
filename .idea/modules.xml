@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/app-java/app-java.iml" filepath="$PROJECT_DIR$/app-java/app-java.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app-kotlin/app-kotlin.iml" filepath="$PROJECT_DIR$/app-kotlin/app-kotlin.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app-rxjava/app-rxjava.iml" filepath="$PROJECT_DIR$/app-rxjava/app-rxjava.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app-rxkotlin/app-rxkotlin.iml" filepath="$PROJECT_DIR$/app-rxkotlin/app-rxkotlin.iml" />
+      <module fileurl="file://$PROJECT_DIR$/library/library.iml" filepath="$PROJECT_DIR$/library/library.iml" />
+      <module fileurl="file://$PROJECT_DIR$/neurosky-android-sdk.iml" filepath="$PROJECT_DIR$/neurosky-android-sdk.iml" />
+    </modules>
+  </component>
+</project>
