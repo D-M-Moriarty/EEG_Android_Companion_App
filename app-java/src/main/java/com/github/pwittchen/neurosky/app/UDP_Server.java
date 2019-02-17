@@ -6,6 +6,8 @@ import android.os.AsyncTask;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 
+import static com.github.pwittchen.neurosky.app.MainActivity.TEXT_RESPONSE;
+
 public class UDP_Server {
 
     private boolean serverActive = true;
@@ -43,12 +45,12 @@ public class UDP_Server {
 
             protected void onProgressUpdate(Void... progress) {
                 TelloController.DRONE_SOCKET_ACTIVE = true;
-                TelloController.TEXT_RESPONSE.setText(droneResponse.trim());
+                TEXT_RESPONSE.setText(droneResponse.trim());
             }
 
             protected void onPostExecute(Void result) {
                 TelloController.DRONE_SOCKET_ACTIVE = false;
-                TelloController.TEXT_RESPONSE.setText("Error. UDP server loop ended unexpectedly!");
+                TEXT_RESPONSE.setText("Error. UDP server loop ended unexpectedly!");
                 super.onPostExecute(result);
             }
         }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);

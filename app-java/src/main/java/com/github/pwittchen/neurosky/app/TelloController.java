@@ -22,13 +22,8 @@ class TelloController {
     static final int DRONE_BUFFER_SIZE = 1518;
     static final int DRONE_PORT = 8889;
     static DatagramSocket UPD_SOCKET = null;
-    private AutoCompleteTextView textCommand;
-    static TextView TEXT_RESPONSE;
-    private MainActivity mainActivity;
 
-
-    TelloController(MainActivity mainActivity) {
-        this.mainActivity = mainActivity;
+    TelloController() {
          try {
             DRONE_ADDRESS = InetAddress.getByName("192.168.10.1");
         } catch (UnknownHostException e) {
@@ -40,6 +35,8 @@ class TelloController {
             udpServer.runUdpServer();
             udpClient = new UDP_Client();
         }
+        udpClient.Message = "command";
+        udpClient.sendMessage();
     }
 
     String[] getmCmdArray() {
@@ -66,19 +63,4 @@ class TelloController {
         return exceptionErrorInetAddress;
     }
 
-    void setTextCommand(int threshold) {
-        this.textCommand.setThreshold(threshold);
-    }
-
-    void setTextCommand(ArrayAdapter<String> adapter) {
-        this.textCommand.setAdapter(adapter);
-    }
-
-    void setTextCommand(String text) {
-        this.textCommand.setText(text);
-    }
-
-    String getTextCmdTxt() {
-        return this.textCommand.getText().toString().trim();
-    }
 }

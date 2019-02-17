@@ -5,11 +5,13 @@ android {
   buildToolsVersion rootProject.ext.buildToolsVersion
 
   defaultConfig {
-    applicationId "com.github.pwittchen.neurosky.app"
-    minSdkVersion rootProject.ext.minSdkVersion
-    targetSdkVersion rootProject.ext.compileSdkVersion
-    versionCode 1
-    versionName "1.0"
+      applicationId "com.github.pwittchen.neurosky.app"
+      minSdkVersion rootProject.ext.minSdkVersion
+      targetSdkVersion rootProject.ext.compileSdkVersion
+      versionCode 1
+      versionName "1.0"
+      testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+      vectorDrawables.useSupportLibrary = true
   }
 
   buildTypes {
@@ -38,4 +40,5 @@ dependencies {
   implementation deps.butterknife
   annotationProcessor deps.butterknifecompiler
   implementation 'org.tensorflow:tensorflow-android:+'
+    implementation 'com.google.android.material:material:1.0.0'
 }
