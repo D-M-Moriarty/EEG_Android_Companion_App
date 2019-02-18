@@ -1,13 +1,10 @@
-package com.github.pwittchen.neurosky.app;
+package com.darren.fyp;
 
-import android.os.Build;
 import android.util.Log;
 
 import org.tensorflow.contrib.android.TensorFlowInferenceInterface;
 
 import java.util.Arrays;
-
-import androidx.annotation.RequiresApi;
 
 public class TensorflowClassifier {
 

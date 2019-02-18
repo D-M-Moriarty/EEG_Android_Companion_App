@@ -1,4 +1,4 @@
-package com.github.pwittchen.neurosky.app;
+package com.darren.fyp;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -10,11 +10,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.github.pwittchen.neurosky.app.R;
 import com.github.pwittchen.neurosky.library.exception.BluetoothNotEnabledException;
 
 import org.tensorflow.contrib.android.TensorFlowInferenceInterface;
@@ -27,14 +27,12 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-import static com.github.pwittchen.neurosky.app.MyNeurosky.LOG_TAG;
-import static com.github.pwittchen.neurosky.app.TelloController.DRONE_SOCKET_ACTIVE;
-import static com.github.pwittchen.neurosky.app.TelloController.EXCEPTION_ERROR_CLIENT;
-import static com.github.pwittchen.neurosky.app.TelloController.EXCEPTION_ERROR_SERVER;
+import static com.darren.fyp.MyNeurosky.LOG_TAG;
+import static com.darren.fyp.TelloController.DRONE_SOCKET_ACTIVE;
+import static com.darren.fyp.TelloController.EXCEPTION_ERROR_CLIENT;
+import static com.darren.fyp.TelloController.EXCEPTION_ERROR_SERVER;
 
 public class MainActivity extends AppCompatActivity implements Observer {
-
-    private MyNeurosky neuroSky;
 
     @BindView(R.id.tv_state)
     TextView tvState;
@@ -49,10 +47,9 @@ public class MainActivity extends AppCompatActivity implements Observer {
     private TensorflowClassifier classifier;
     private TelloController telloController;
 
-
-    private AutoCompleteTextView textCommand;
     static String TEXT_RESPONSE;
     private boolean performingActions;
+    private MyNeurosky neuroSky;
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
     @Override
@@ -72,8 +69,6 @@ public class MainActivity extends AppCompatActivity implements Observer {
         ArrayAdapter<String> adapter = new ArrayAdapter<String>
                 (this, android.R.layout.simple_list_item_1, telloController.getmCmdArray());
 
-//        textCommand.setThreshold(1);//will start working from first character
-//        textCommand.setAdapter(adapter);
     }
 
     @Override
@@ -180,13 +175,13 @@ public class MainActivity extends AppCompatActivity implements Observer {
     }
 
     private void chosenCommand(String classReturned) {
-        if (classReturned.equals("forward")) {
-            telloController.setUdpClientMessage("forward 40");
-            telloController.udpClientSendMessage();
-        } else if (classReturned.equals("back")) {
-            telloController.setUdpClientMessage("back 40");
-            telloController.udpClientSendMessage();
-        }
+        String cmd = "rest";
+        if (classReturned.equals("forward"))
+            cmd = "forward 40";
+        else if (classReturned.equals("back"))
+            cmd = "back 40";
+        telloController.setUdpClientMessage(cmd);
+        telloController.udpClientSendMessage();
     }
 
     public void onClickConnect(View view) {
@@ -195,24 +190,14 @@ public class MainActivity extends AppCompatActivity implements Observer {
     }
 
     public void onClickLand(View view) {
-
         if(EXCEPTION_ERROR_CLIENT) {
             TEXT_RESPONSE = "Exception error in UDP client.";
         } else if(EXCEPTION_ERROR_SERVER) {
             TEXT_RESPONSE = "Exception error in UDP server.";
         } else {
-//            String cmd = textCommand.getText().toString().trim();
-////
-////            textCommand.setText("land");
-//            textCommand.clearFocus();
             if(DRONE_SOCKET_ACTIVE) {
                 TEXT_RESPONSE = "";
             }
-//            // If user presses button with no command entered, land immediately!
-//            if (cmd.isEmpty()) {
-//                cmd = "land";
-//            }
-
             telloController.setUdpClientMessage("land");
             telloController.udpClientSendMessage();
             Toast.makeText(this, "Sent: (land)", Toast.LENGTH_SHORT).show();
@@ -221,22 +206,13 @@ public class MainActivity extends AppCompatActivity implements Observer {
 
     public void onClickTakeOff(View view) {
         if(EXCEPTION_ERROR_CLIENT) {
-//            TEXT_RESPONSE.setText("Exception error in UDP client.");
             System.out.println("Exception error in UDP client.");
         } else if(EXCEPTION_ERROR_SERVER) {
             TEXT_RESPONSE = "Exception error in UDP server.";
         } else {
-//            String cmd = textCommand.getText().toString().trim();
-//
-//            textCommand.setText("takeoff");
-//            textCommand.clearFocus();
             if(DRONE_SOCKET_ACTIVE) {
                 TEXT_RESPONSE = "";
             }
-//            // If user presses button with no command entered, land immediately!
-//            if (cmd.isEmpty()) {
-//                cmd = "land";
-//            }
             telloController.setUdpClientMessage("takeoff");
             telloController.udpClientSendMessage();
             Toast.makeText(this, "Sent: (takeoff)", Toast.LENGTH_SHORT).show();

@@ -1,4 +1,4 @@
-package com.github.pwittchen.neurosky.app;
+package com.darren.fyp;
 
 import java.net.DatagramSocket;
 import java.net.InetAddress;

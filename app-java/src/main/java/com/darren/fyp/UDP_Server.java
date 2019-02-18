@@ -1,12 +1,11 @@
-package com.github.pwittchen.neurosky.app;
+package com.darren.fyp;
 
-import android.annotation.SuppressLint;
 import android.os.AsyncTask;
 
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 
-import static com.github.pwittchen.neurosky.app.MainActivity.TEXT_RESPONSE;
+import static com.darren.fyp.MainActivity.TEXT_RESPONSE;
 
 public class UDP_Server {
 

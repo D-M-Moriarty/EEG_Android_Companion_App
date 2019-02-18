@@ -1,4 +1,4 @@
-package com.github.pwittchen.neurosky.app;
+package com.darren.fyp;
 
 public interface Subject {
     void registerObserver(Observer observer);

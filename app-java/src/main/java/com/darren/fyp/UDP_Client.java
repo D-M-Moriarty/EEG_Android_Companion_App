@@ -1,6 +1,5 @@
-package com.github.pwittchen.neurosky.app;
+package com.darren.fyp;
 
-import android.annotation.SuppressLint;
 import android.os.AsyncTask;
 
 import java.net.DatagramPacket;
