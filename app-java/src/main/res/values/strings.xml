@@ -11,6 +11,10 @@
   <string name="waiting_for_state">waiting for state...</string>
 
   <string name="action_about">About</string>
+    <string name="takeoff">TakeOff</string>
+  <string name="land">Land</string>
+  <string name="neurofly">NeuroFly</string>
+  <string name="connectTello">Connect</string>
 
   <!-- Strings related to Settings -->
   <string-array name="Commands">

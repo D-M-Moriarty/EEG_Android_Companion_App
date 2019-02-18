@@ -1,5 +1,6 @@
 package com.darren.fyp;
 
+import android.annotation.SuppressLint;
 import android.os.AsyncTask;
 
 import java.net.DatagramPacket;
@@ -9,6 +10,7 @@ public class UDP_Client {
 
     public String Message;
 
+    @SuppressLint("StaticFieldLeak")
     public void sendMessage() {
         new AsyncTask<Void, Void, Void>() {
             @Override

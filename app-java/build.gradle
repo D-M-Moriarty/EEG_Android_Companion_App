@@ -40,5 +40,6 @@ dependencies {
   implementation deps.butterknife
   annotationProcessor deps.butterknifecompiler
   implementation 'org.tensorflow:tensorflow-android:+'
+    implementation group: 'biz.k11i', name: 'xgboost-predictor', version: '0.3.0'
     implementation 'com.google.android.material:material:1.0.0'
 }

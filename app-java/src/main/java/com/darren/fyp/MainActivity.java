@@ -3,14 +3,11 @@ package com.darren.fyp;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,18 +16,26 @@ import com.github.pwittchen.neurosky.library.exception.BluetoothNotEnabledExcept
 
 import org.tensorflow.contrib.android.TensorFlowInferenceInterface;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Arrays;
+import java.util.HashMap;
 
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import biz.k11i.xgboost.Predictor;
+import biz.k11i.xgboost.util.FVec;
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 import static com.darren.fyp.MyNeurosky.LOG_TAG;
 import static com.darren.fyp.TelloController.DRONE_SOCKET_ACTIVE;
 import static com.darren.fyp.TelloController.EXCEPTION_ERROR_CLIENT;
 import static com.darren.fyp.TelloController.EXCEPTION_ERROR_SERVER;
+import static com.github.pwittchen.neurosky.app.R.id.btn_connect;
+import static com.github.pwittchen.neurosky.app.R.id.btn_disconnect;
+import static com.github.pwittchen.neurosky.app.R.id.btn_start_monitoring;
+import static com.github.pwittchen.neurosky.app.R.id.btn_stop_monitoring;
 
 public class MainActivity extends AppCompatActivity implements Observer {
 
@@ -51,37 +56,42 @@ public class MainActivity extends AppCompatActivity implements Observer {
     private boolean performingActions;
     private MyNeurosky neuroSky;
 
-    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LOCKED);
 
-        inferenceInterface = new TensorFlowInferenceInterface(getAssets(), "cat_dog.pb");
-        classifier = new TensorflowClassifier(inferenceInterface);
-        ButterKnife.bind(this);
-        neuroSky = new MyNeurosky(this);
-        neuroSky.registerObserver(this);
-        telloController = new TelloController();
+        try {
+            xgbTest();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-        telloController.setmCmdArray(getResources().getStringArray(R.array.Commands));
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>
-                (this, android.R.layout.simple_list_item_1, telloController.getmCmdArray());
+//        inferenceInterface = new TensorFlowInferenceInterface(getAssets(), "cat_dog.pb");
+//        classifier = new TensorflowClassifier(inferenceInterface);
+//        ButterKnife.bind(this);
+//        neuroSky = new MyNeurosky(this);
+//        neuroSky.registerObserver(this);
+//        telloController = new TelloController();
+//
+//        telloController.setmCmdArray(getResources().getStringArray(R.array.Commands));
+//        ArrayAdapter<String> adapter = new ArrayAdapter<String>
+//                (this, android.R.layout.simple_list_item_1, telloController.getmCmdArray());
 
     }
 
     @Override
     protected void onResume() {
-        if (telloController.isExceptionErrorInetAddress()) {
-            TEXT_RESPONSE = "Exception error creating InetAddress!";
-            Button button = findViewById(R.id.btnTakeOff);
-            button.setEnabled(false);
-        }
+//        if (telloController.isExceptionErrorInetAddress()) {
+//            TEXT_RESPONSE = "Exception error creating InetAddress!";
+//            Button button = findViewById(R.id.btnTakeOff);
+//            button.setEnabled(false);
+//        }
         super.onResume();
-        if (neuroSky != null && neuroSky.isConnected()) {
-            neuroSky.start();
-        }
+//        if (neuroSky != null && neuroSky.isConnected()) {
+//            neuroSky.start();
+//        }
     }
 
     @Override
@@ -95,8 +105,8 @@ public class MainActivity extends AppCompatActivity implements Observer {
         }
     }
 
-    @OnClick(R.id.btn_connect)
-    void connect() {
+    @OnClick(btn_connect)
+    public void connect() {
         try {
             neuroSky.connect();
         } catch (BluetoothNotEnabledException e) {
@@ -105,15 +115,15 @@ public class MainActivity extends AppCompatActivity implements Observer {
         }
     }
 
-    @OnClick(R.id.btn_disconnect)
-    void disconnect() {
+    @OnClick(btn_disconnect)
+    public void disconnect() {
         neuroSky.disconnect();
         Intent emailIntent = neuroSky.sendEmailFile();
         startActivity(Intent.createChooser(emailIntent, "Choose Email client :"));
     }
 
-    @OnClick(R.id.btn_start_monitoring)
-    void startMonitoring() {
+    @OnClick(btn_start_monitoring)
+    public void startMonitoring() {
         neuroSky.start();
     }
 
@@ -123,8 +133,8 @@ public class MainActivity extends AppCompatActivity implements Observer {
        System.out.println("nowo performing actionzzz");
     }
 
-    @OnClick(R.id.btn_stop_monitoring)
-    void stopMonitoring() {
+    @OnClick(btn_stop_monitoring)
+    public void stopMonitoring() {
         neuroSky.stop();
     }
 
@@ -218,4 +228,45 @@ public class MainActivity extends AppCompatActivity implements Observer {
             Toast.makeText(this, "Sent: (takeoff)", Toast.LENGTH_SHORT).show();
         }
     }
+
+    void xgbTest() throws IOException {
+        // If you want to use faster exp() calculation, uncomment the line below
+        // ObjFunction.useFastMathExp(true);
+
+        InputStream pathTOModel = getAssets().open("xgb/xgb_77.dat");
+        FileInputStream inputStream = (FileInputStream) pathTOModel;
+
+        String path = pathTOModel.toString();
+
+
+//        System.out.println(pathTOModel);
+        // Load model and create Predictor
+        Predictor predictor = new Predictor(inputStream);
+        // Create feature vector from dense representation by array
+        double[] denseArray = {0, 0, 32, 0, 0, 16, -8, 0, 0, 0};
+        FVec fVecDense = FVec.Transformer.fromArray(
+                denseArray,
+                true /* treat zero element as N/A */);
+
+        // Create feature vector from sparse representation by map
+        FVec fVecSparse = FVec.Transformer.fromMap(
+                new HashMap<Integer, Double>() {{
+                    put(2, 32.);
+                    put(5, 16.);
+                    put(6, -8.);
+                }});
+
+        // Predict probability or classification
+        double[] prediction = predictor.predict(fVecDense);
+
+        // prediction[0] has
+        //    - probability ("binary:logistic")
+        //    - class label ("multi:softmax")
+
+        // Predict leaf index of each tree
+        int[] leafIndexes = predictor.predictLeaf(fVecDense);
+
+        // leafIndexes[i] has a leaf index of i-th tree
+    }
+
 }

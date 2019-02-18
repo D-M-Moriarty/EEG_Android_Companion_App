@@ -1,5 +1,6 @@
 package com.darren.fyp;
 
+import android.annotation.SuppressLint;
 import android.os.AsyncTask;
 
 import java.net.DatagramPacket;
@@ -13,6 +14,7 @@ public class UDP_Server {
     private String droneResponse;
 
 //    @SuppressLint("NewApi")
+    @SuppressLint("StaticFieldLeak")
     public void runUdpServer()
     {
         new AsyncTask<Void, Void, Void>() {
