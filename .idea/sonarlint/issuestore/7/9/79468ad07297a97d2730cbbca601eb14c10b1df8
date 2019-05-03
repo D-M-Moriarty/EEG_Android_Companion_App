@@ -1,34 +1,0 @@
-
-Msquid:S10685"/Remove this unused "textCommand" private field.(ß­µê8Òœ÷ã-
-isquid:CommentedOutCodeLineÎ"<This block of commented-out lines of code should be removed.(Åæ†:8Òœ÷ã-
-V
-squid:S106€"9Replace this use of System.out or System.err by a logger.(òÙÑw8ƒ­äå-
-\
-squid:S106­"9Replace this use of System.out or System.err by a logger.(ğ‚ƒ¨ıÿÿÿÿ8å¹²Ş-
-Nsquid:S00108 ")Either remove or fill this block of code.(µáÙÿÿÿÿÿ8Ş¶‡ß-
-Usquid:S2696Ê"6Make the enclosing method "static" or remove this set.(¡º¨ø8”ˆŒå-
-jsquid:CommentedOutCodeLineå"<This block of commented-out lines of code should be removed.(¿‘¢é8¶Ášã-
-Zsquid:S2696Ñ"6Make the enclosing method "static" or remove this set.(†ÿÅ„ûÿÿÿÿ8Ñ‹å-
-Ysquid:S1854H";Remove this useless assignment to local variable "adapter".(®âøÓ8¬×—ã-
-V
-squid:S106ª"9Replace this use of System.out or System.err by a logger.(Ö˜ş8å¹²Ş-
-V
-squid:S106¨"9Replace this use of System.out or System.err by a logger.(âµÉj8å¹²Ş-
-vsquid:S30086"XRename this field "TEXT_RESPONSE" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ø›½Â8Œ…‡ã-
-jsquid:CommentedOutCodeLineÌ"<This block of commented-out lines of code should be removed.(¿‘¢é8Òœ÷ã-
-Ssquid:S2696R"6Make the enclosing method "static" or remove this set.(î÷ô*8è­Šå-
-Usquid:S2696ã"6Make the enclosing method "static" or remove this set.(¡º¨ø8Íœ‹å-
-jsquid:CommentedOutCodeLineÔ"<This block of commented-out lines of code should be removed.(ÄÏÔß8•Îõã-
-\
-squid:S106á"9Replace this use of System.out or System.err by a logger.(¤çùÓüÿÿÿÿ8ê×¸ä-
-~squid:S14500"aRemove the "inferenceInterface" field and declare it as a local variable in the relevant methods.(¯”Ÿ!8ŞÕÃ-
-jsquid:CommentedOutCodeLineç"<This block of commented-out lines of code should be removed.(»…È8¶Ášã-
-jsquid:CommentedOutCodeLineí"<This block of commented-out lines of code should be removed.(ÄÏÔß8”Üšã-
-\
-squid:S106°"9Replace this use of System.out or System.err by a logger.(İåŒœşÿÿÿÿ8ğ‡ëå-
-Jsquid:S1481H",Remove this unused "adapter" local variable.(®âøÓ8¬×—ã-
-isquid:CommentedOutCodeLineL"<This block of commented-out lines of code should be removed.(„Ë³²8¬×—ã-
-wsquid:S2293H"YReplace the type specification in this constructor call with the diamond operator ("<>").(®âøÓ8Œ·ÒŞ-
-osquid:CommentedOutCodeLineà"<This block of commented-out lines of code should be removed.(óÒøğùÿÿÿÿ8œò¸ä-
-Usquid:S2696È"6Make the enclosing method "static" or remove this set.(»‰ÏÎ8«±Œå-
-Zsquid:S2696ê"6Make the enclosing method "static" or remove this set.(†ÿÅ„ûÿÿÿÿ8îæŠå-

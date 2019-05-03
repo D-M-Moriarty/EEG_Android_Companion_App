@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,22 +17,18 @@ import com.github.pwittchen.neurosky.library.exception.BluetoothNotEnabledExcept
 
 import org.tensorflow.contrib.android.TensorFlowInferenceInterface;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.Arrays;
-import java.util.HashMap;
 
 import androidx.appcompat.app.AppCompatActivity;
-import biz.k11i.xgboost.Predictor;
-import biz.k11i.xgboost.util.FVec;
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 import static com.darren.fyp.MyNeurosky.LOG_TAG;
 import static com.darren.fyp.TelloController.DRONE_SOCKET_ACTIVE;
 import static com.darren.fyp.TelloController.EXCEPTION_ERROR_CLIENT;
 import static com.darren.fyp.TelloController.EXCEPTION_ERROR_SERVER;
+import static com.github.pwittchen.neurosky.app.R.id.btnDirection;
 import static com.github.pwittchen.neurosky.app.R.id.btn_connect;
 import static com.github.pwittchen.neurosky.app.R.id.btn_disconnect;
 import static com.github.pwittchen.neurosky.app.R.id.btn_start_monitoring;
@@ -56,42 +53,36 @@ public class MainActivity extends AppCompatActivity implements Observer {
     private boolean performingActions;
     private MyNeurosky neuroSky;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LOCKED);
 
-        try {
-            xgbTest();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        inferenceInterface = new TensorFlowInferenceInterface(getAssets(), "cat_dog.pb");
+        classifier = new TensorflowClassifier(inferenceInterface);
+        ButterKnife.bind(this);
+        neuroSky = new MyNeurosky(this);
+        neuroSky.registerObserver(this);
+        telloController = new TelloController();
 
-//        inferenceInterface = new TensorFlowInferenceInterface(getAssets(), "cat_dog.pb");
-//        classifier = new TensorflowClassifier(inferenceInterface);
-//        ButterKnife.bind(this);
-//        neuroSky = new MyNeurosky(this);
-//        neuroSky.registerObserver(this);
-//        telloController = new TelloController();
-//
-//        telloController.setmCmdArray(getResources().getStringArray(R.array.Commands));
-//        ArrayAdapter<String> adapter = new ArrayAdapter<String>
-//                (this, android.R.layout.simple_list_item_1, telloController.getmCmdArray());
+
+        telloController.setmCmdArray(getResources().getStringArray(R.array.Commands));
 
     }
 
     @Override
     protected void onResume() {
-//        if (telloController.isExceptionErrorInetAddress()) {
-//            TEXT_RESPONSE = "Exception error creating InetAddress!";
-//            Button button = findViewById(R.id.btnTakeOff);
-//            button.setEnabled(false);
-//        }
+        if (telloController.isExceptionErrorInetAddress()) {
+            TEXT_RESPONSE = "Exception error creating InetAddress!";
+            Button button = findViewById(R.id.btnTakeOff);
+            button.setEnabled(false);
+        }
         super.onResume();
-//        if (neuroSky != null && neuroSky.isConnected()) {
-//            neuroSky.start();
-//        }
+        if (neuroSky != null && neuroSky.isConnected()) {
+            neuroSky.start();
+        }
     }
 
     @Override
@@ -127,6 +118,10 @@ public class MainActivity extends AppCompatActivity implements Observer {
         neuroSky.start();
     }
 
+    @OnClick(btnDirection)
+    public void goToDirection() {
+    }
+
 
    public void onClickPerformAction(View view) {
         performingActions = !performingActions;
@@ -142,30 +137,6 @@ public class MainActivity extends AppCompatActivity implements Observer {
     protected void onDestroy() {
         telloController.stopUdpServer();
         super.onDestroy();
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        if (id == R.id.action_about) {
-            try {
-                String versionName = getPackageManager().getPackageInfo(getPackageName(), 0).versionName;
-                Toast.makeText(this, "App version: " + versionName + "\nBlue Spectrum Software", Toast.LENGTH_LONG).show();
-            } catch(PackageManager.NameNotFoundException e) {}
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -229,44 +200,28 @@ public class MainActivity extends AppCompatActivity implements Observer {
         }
     }
 
-    void xgbTest() throws IOException {
-        // If you want to use faster exp() calculation, uncomment the line below
-        // ObjFunction.useFastMathExp(true);
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
 
-        InputStream pathTOModel = getAssets().open("xgb/xgb_77.dat");
-        FileInputStream inputStream = (FileInputStream) pathTOModel;
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
 
-        String path = pathTOModel.toString();
+        if (id == R.id.action_about) {
+            try {
+                String versionName = getPackageManager().getPackageInfo(getPackageName(), 0).versionName;
+                Toast.makeText(this, "App version: " + versionName + "\nBlue Spectrum Software", Toast.LENGTH_LONG).show();
+            } catch(PackageManager.NameNotFoundException e) {}
+        }
 
-
-//        System.out.println(pathTOModel);
-        // Load model and create Predictor
-        Predictor predictor = new Predictor(inputStream);
-        // Create feature vector from dense representation by array
-        double[] denseArray = {0, 0, 32, 0, 0, 16, -8, 0, 0, 0};
-        FVec fVecDense = FVec.Transformer.fromArray(
-                denseArray,
-                true /* treat zero element as N/A */);
-
-        // Create feature vector from sparse representation by map
-        FVec fVecSparse = FVec.Transformer.fromMap(
-                new HashMap<Integer, Double>() {{
-                    put(2, 32.);
-                    put(5, 16.);
-                    put(6, -8.);
-                }});
-
-        // Predict probability or classification
-        double[] prediction = predictor.predict(fVecDense);
-
-        // prediction[0] has
-        //    - probability ("binary:logistic")
-        //    - class label ("multi:softmax")
-
-        // Predict leaf index of each tree
-        int[] leafIndexes = predictor.predictLeaf(fVecDense);
-
-        // leafIndexes[i] has a leaf index of i-th tree
+        return super.onOptionsItemSelected(item);
     }
 
 }

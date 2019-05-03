@@ -14,19 +14,30 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Set;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 public class MyNeurosky implements Subject {
 
     public final static String LOG_TAG = "NeuroSky";
     private static String waves = "eegRawValue,delta,theta,alphaLow,alphaHigh,betaLow,betaHigh,gammaLow,gammaMid";
+    private String expression;
 
     private NeuroSky neuroSky;
     private MainActivity mainActivity;
+    private DirectionActivity directionActivity;
 
     private List<Observer> observers;
     private int[] brainWaves;
 
     MyNeurosky(MainActivity mainActivity) {
         this.mainActivity = mainActivity;
+        this.neuroSky = createNeuroSky();
+        this.observers = new ArrayList<>();
+        brainWaves = new int[8];
+    }
+
+    MyNeurosky(DirectionActivity directionActivity) {
+        this.directionActivity = directionActivity;
         this.neuroSky = createNeuroSky();
         this.observers = new ArrayList<>();
         brainWaves = new int[8];
@@ -53,34 +64,35 @@ public class MyNeurosky implements Subject {
             neuroSky.start();
         }
 
-        mainActivity.tvState.setText(state.toString());
+        if (mainActivity != null)
+            mainActivity.tvState.setText(state.toString());
         Log.d(LOG_TAG, state.toString());
     }
 
     private void handleSignalChange(final Signal signal) {
-        switch (signal) {
-            case ATTENTION:
-                mainActivity.tvAttention.setText(getFormattedMessage("attention: %d", signal));
-                break;
-            case MEDITATION:
-                mainActivity.tvMeditation.setText(getFormattedMessage("meditation: %d", signal));
-                break;
-            case RAW_DATA:
-                mainActivity.tvBlink.setText(getFormattedMessage("RAW_DATA: %d", signal));
-                break;
-//      case HEART_RATE:
-//        tvBlink.setText(getFormattedMessage("HEART_RATE: %d", signal));
-//        break;
-//      case RAW_MULTI:
-//        tvBlink.setText(getFormattedMessage("RAW_MULTI: %d", signal));
-//        break;
-//      case EEG_POWER:
-//        tvBlink.setText(getFormattedMessage("EEG_POWER: %d", signal));
-//        break;
-//      case BLINK:
-//        tvBlink.setText(getFormattedMessage("blink: %d", signal));
-//        break;
-        }
+//        switch (signal) {
+//            case ATTENTION:
+//                mainActivity.tvAttention.setText(getFormattedMessage("attention: %d", signal));
+//                break;
+//            case MEDITATION:
+//                mainActivity.tvMeditation.setText(getFormattedMessage("meditation: %d", signal));
+//                break;
+//            case RAW_DATA:
+//                mainActivity.tvBlink.setText(getFormattedMessage("RAW_DATA: %d", signal));
+//                break;
+////      case HEART_RATE:
+////        tvBlink.setText(getFormattedMessage("HEART_RATE: %d", signal));
+////        break;
+////      case RAW_MULTI:
+////        tvBlink.setText(getFormattedMessage("RAW_MULTI: %d", signal));
+////        break;
+////      case EEG_POWER:
+////        tvBlink.setText(getFormattedMessage("EEG_POWER: %d", signal));
+////        break;
+////      case BLINK:
+////        tvBlink.setText(getFormattedMessage("blink: %d", signal));
+////        break;
+//        }
 
         Log.d(LOG_TAG, String.format("%s: %d", signal.toString(), signal.getValue()));
     }
@@ -95,7 +107,11 @@ public class MyNeurosky implements Subject {
         findWaves(brainWaves, bv);
         for (Integer w: bv)
             waveLine.append(w + ",");
-        waves += ("\n" + waveLine);
+        if (expression != null) {
+            waveLine.append(expression);
+            waves += ("\n" + waveLine);
+            //        System.out.println(waves);
+        }
     }
 
     private void findWaves(Set<BrainWave> brainWaves, int[] bv) {
@@ -171,5 +187,9 @@ public class MyNeurosky implements Subject {
     public void notifyObservers() {
         for (Observer observer: observers)
             observer.updateObserver(brainWaves);
+    }
+
+    public void setExpression(String expression) {
+        this.expression = expression;
     }
 }
