@@ -1,0 +1,9 @@
+
+Rsquid:S2696"6Make the enclosing method "static" or remove this set.( €¿ûÿÿÿÿÿ
+Msquid:S2696"6Make the enclosing method "static" or remove this set.(™ƒßˆ
+Rsquid:S2696 "6Make the enclosing method "static" or remove this set.(€´æéûÿÿÿÿ
+†"squid:ClassVariableVisibilityCheck"SMake Message a static final constant or non-public and provide accessors if needed.(è§è¬þÿÿÿÿ
+esquid:S00101	"MRename this class name to match the regular expression '^[A-Z][a-zA-Z0-9]*$'.(è¿úù
+Dsquid:S1185%"(Remove this method to simply inherit it.(’á›ûøÿÿÿÿ
+osquid:S00116"RRename this field "Message" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(è§è¬þÿÿÿÿ
+?squid:S1148"#Use a logger to log this exception.(€ÉÔ…ýÿÿÿÿ

@@ -1,0 +1,23 @@
+
+¤squid:S1186z"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(€”êĞøÿÿÿÿ8±™êöŸ-
+\
+squid:S106˜"9Replace this use of System.out or System.err by a logger.(İåŒœşÿÿÿÿ8Ñ›ÔöŸ-
+Ssquid:S2696N"6Make the enclosing method "static" or remove this set.(î÷ô*8Ñ›ÔöŸ-
+Usquid:S2696±"6Make the enclosing method "static" or remove this set.(¡º¨ø8Ñ›ÔöŸ-
+Zsquid:S2696Ã"6Make the enclosing method "static" or remove this set.(†ÿÅ„ûÿÿÿÿ8Ñ›ÔöŸ-
+\
+squid:S106¾"9Replace this use of System.out or System.err by a logger.(¤çùÓüÿÿÿÿ8Ñ›ÔöŸ-
+V
+squid:S106€"9Replace this use of System.out or System.err by a logger.(òÙÑw8Ñ›ÔöŸ-
+\
+squid:S106•"9Replace this use of System.out or System.err by a logger.(ğ‚ƒ¨ıÿÿÿÿ8Ñ›ÔöŸ-
+vsquid:S30084"XRename this field "TEXT_RESPONSE" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ø›½Â8Ñ›ÔöŸ-
+V
+squid:S106"9Replace this use of System.out or System.err by a logger.(âµÉj8Ñ›ÔöŸ-
+Zsquid:S2696´"6Make the enclosing method "static" or remove this set.(†ÿÅ„ûÿÿÿÿ8Ñ›ÔöŸ-
+Nsquid:S00108İ")Either remove or fill this block of code.(µáÙÿÿÿÿÿ8îÃ¦÷Ÿ-
+V
+squid:S106’"9Replace this use of System.out or System.err by a logger.(Ö˜ş8Ñ›ÔöŸ-
+Usquid:S2696¯"6Make the enclosing method "static" or remove this set.(»‰ÏÎ8Ñ›ÔöŸ-
+~squid:S14500"aRemove the "inferenceInterface" field and declare it as a local variable in the relevant methods.(¯”Ÿ!8Ñ›ÔöŸ-
+Usquid:S2696À"6Make the enclosing method "static" or remove this set.(¡º¨ø8Ñ›ÔöŸ-

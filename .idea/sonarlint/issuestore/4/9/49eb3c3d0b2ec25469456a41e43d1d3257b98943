@@ -1,0 +1,11 @@
+
+Fsquid:S2093"*Change this "try" to a try-with-resources.(¡»¢üùÿÿÿÿ
+Rsquid:S2696"6Make the enclosing method "static" or remove this set.( €¿ûÿÿÿÿÿ
+Rsquid:S2696%"6Make the enclosing method "static" or remove this set.(°ŞÊ«ùÿÿÿÿ
+Rsquid:S2696/"6Make the enclosing method "static" or remove this set.(²•·öüÿÿÿÿ
+Lsquid:S26960"6Make the enclosing method "static" or remove this set.(°¨”	
+Msquid:S26964"6Make the enclosing method "static" or remove this set.(™ƒßˆ
+Msquid:S26965"6Make the enclosing method "static" or remove this set.(ÆÎÖ
+jsquid:S00101"MRename this class name to match the regular expression '^[A-Z][a-zA-Z0-9]*$'.(Ú»âÚøÿÿÿÿ
+fsquid:S00100;"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÚÄÜá
+?squid:S1148$"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ

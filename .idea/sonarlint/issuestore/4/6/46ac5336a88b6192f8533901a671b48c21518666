@@ -1,0 +1,10 @@
+
+gsquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(Æ©ýÀüÿÿÿÿ
+Ksquid:S1481"/Remove this unused "fVecSparse" local variable.(‡ÜßÅùÿÿÿÿ
+Fsquid:S1481 "/Remove this unused "prediction" local variable.(ÓšÅ²
+Lsquid:S1481'"0Remove this unused "leafIndexes" local variable.(ÙÚÇìøÿÿÿÿ
+psquid:S1171"YMove the contents of this initializer to a standard constructor or to field initializers.(üœéÛ
+[squid:S1854'"?Remove this useless assignment to local variable "leafIndexes".(ÙÚÇìøÿÿÿÿ
+Usquid:S1854 ">Remove this useless assignment to local variable "prediction".(ÓšÅ²
+Zsquid:S1854">Remove this useless assignment to local variable "fVecSparse".(‡ÜßÅùÿÿÿÿ
+Csquid:S3599",Use another way to initialize this instance.(üœéÛ

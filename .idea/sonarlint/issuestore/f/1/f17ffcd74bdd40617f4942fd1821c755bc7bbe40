@@ -1,0 +1,7 @@
+
+U
+squid:S106d"9Replace this use of System.out or System.err by a logger.(Ö˜ş8ŸÃü÷Ÿ-
+~squid:S1450"aRemove the "inferenceInterface" field and declare it as a local variable in the relevant methods.(¯”Ÿ!8°ş÷Ÿ-
+bsquid:UselessImportCheck"2Remove this unused import 'android.widget.Button'.(²òıÿÿÿÿ8Ú®â÷Ÿ-
+U
+squid:S106b"9Replace this use of System.out or System.err by a logger.(âµÉj8ŸÃü÷Ÿ-

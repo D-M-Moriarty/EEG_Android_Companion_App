@@ -1,0 +1,15 @@
+
+nsquid:CommentedOutCodeLineI"<This block of commented-out lines of code should be removed.(³£üëùÿÿÿÿ8ø‚ð÷Ÿ-
+isquid:CommentedOutCodeLineQ"<This block of commented-out lines of code should be removed.(ÔŠ¡š8ø‚ð÷Ÿ-
+gsquid:CommentedOutCodeLineT"<This block of commented-out lines of code should be removed.(´äîšÿÿÿÿÿ
+Ssquid:S2696p"6Make the enclosing method "static" or remove this set.(Üèê#8Õí×òŸ-
+Rsquid:S1068"5Remove this unused "directionActivity" private field.(­åˆ8Ý˜Ý÷Ÿ-
+nsquid:CommentedOutCodeLineK"<This block of commented-out lines of code should be removed.(çÑ†Šýÿÿÿÿ8ø‚ð÷Ÿ-
+isquid:UnusedPrivateMethodd"8Remove this unused private "getFormattedMessage" method.(Œ”áŒúÿÿÿÿ8ø‚ð÷Ÿ-
+hsquid:CommentedOutCodeLineN"<This block of commented-out lines of code should be removed.(ð¸Ô8ø‚ð÷Ÿ-
+nsquid:CommentedOutCodeLineq"<This block of commented-out lines of code should be removed.(ºÜ÷øúÿÿÿÿ8ëä¦øŸ-
+osquid:ModifiersOrderCheck"EReorder the modifiers to comply with the Java Language Specification.(¨ÖÏ·ùÿÿÿÿ
+bsquid:CommentedOutCodeLineZ"<This block of commented-out lines of code should be removed.(Þý Æ
+psquid:UselessImportCheck"ERemove this unused import 'androidx.appcompat.app.AppCompatActivity'.(€¶£î8Ï»Ü÷Ÿ-
+bsquid:CommentedOutCodeLineW"<This block of commented-out lines of code should be removed.(Œí”È
+bsquid:CommentedOutCodeLine]"<This block of commented-out lines of code should be removed.(‰‘°¸
