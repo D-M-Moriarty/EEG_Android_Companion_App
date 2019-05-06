@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity implements Observer {
         setContentView(R.layout.activity_main);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LOCKED);
 
-        inferenceInterface = new TensorFlowInferenceInterface(getAssets(), "tensorflow/faces.pb");
+        inferenceInterface = new TensorFlowInferenceInterface(getAssets(), "cat_dog.pb");
         classifier = new TensorflowClassifier(inferenceInterface);
         ButterKnife.bind(this);
         neuroSky = new MyNeurosky(this);
@@ -142,10 +142,10 @@ public class MainActivity extends AppCompatActivity implements Observer {
     @Override
     public void updateObserver(int[] waves) {
         System.out.println(Arrays.toString(waves));
-        double[] normalizedWaves = classifier.normalizeFaceArray(waves);
+        double[] normalizedWaves = classifier.normalizeArray(waves);
         System.out.println("normalized " + Arrays.toString(normalizedWaves));
         float[] prediction = classifier.getPrediction(normalizedWaves);
-        String classReturned = classifier.getFaceClass(prediction);
+        String classReturned = classifier.getClass(prediction);
         System.out.println(classReturned);
         if (performingActions) {
             chosenCommand(classReturned);

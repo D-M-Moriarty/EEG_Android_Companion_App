@@ -15,7 +15,7 @@ public class TensorflowClassifier {
     }
 
     public float[] getPrediction(double[] input) {
-        float[] output = predictFace(input);
+        float[] output = predict(input);
         Log.d(getClass().getSimpleName(),Arrays.toString(input)+" -> "+Arrays.toString(output));
         return output;
     }
